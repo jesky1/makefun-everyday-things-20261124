@@ -50,6 +50,12 @@ export function validateEntry(text: string): string {
   if (!/toaster/i.test(lines[0])) {
     throw new Error("line 1 must explain a toaster");
   }
+  if (/ like /i.test(lines[0])) {
+    throw new Error("line 1 must hold one analogy, not a second comparison");
+  }
+  if (!/because/i.test(lines[1])) {
+    throw new Error("line 2 must explain why the analogy works");
+  }
   if (!/leaves out/i.test(lines[1])) {
     throw new Error("line 2 must name what the analogy leaves out");
   }

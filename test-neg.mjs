@@ -60,6 +60,20 @@ test("entry without the toaster in line 1 is rejected", () => {
   );
 });
 
+test("line 2 without explaining why is rejected", () => {
+  assert.throws(
+    () => validateEntry(line1 + "\n" + line2.replace("because both use", "and both use")),
+    /why the analogy works/,
+  );
+});
+
+test("second comparison in line 1 is rejected", () => {
+  assert.throws(
+    () => validateEntry(line1.replace("turns golden brown", "turns golden brown like toast") + "\n" + line2),
+    /one analogy/,
+  );
+});
+
 test("line 2 without naming what is left out is rejected", () => {
   assert.throws(
     () => validateEntry(line1 + "\n" + line2.replace("but it leaves out", "and it forgets")),
